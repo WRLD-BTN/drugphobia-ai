@@ -1,0 +1,50 @@
+{
+  "_comment": "Quiz content only. Scores are shown to the user but never persisted with any identifying detail — only an aggregate count is logged (see chats_metadata schema).",
+  "modules": [
+    {
+      "id": "myths_vs_facts",
+      "title_en": "Myths vs Facts",
+      "title_sn": "Ngano kana Chokwadi",
+      "questions": [
+        {"q_en": "True or False: Mutoriro (cough syrup) is safe because it's a medicine.", "q_sn": "Chokwadi kana Nhema: Mutoriro hauna njodzi nekuti mushonga.", "options": ["True", "False"], "answer": "False", "note_en": "Misuse of any medicine, including cough syrup, carries real risk. Talk to NDA 0808 20 20 style helplines if concerned.", "note_sn": "Kushandisa zvisiri izvo mushonga upi zvawo kune njodzi chaiyo."},
+        {"q_en": "True or False: You can safely predict what is in a street mix like \"pink.\"", "q_sn": "Chokwadi kana Nhema: Unogona kuziva zviri mu'pink' zvakadzama.", "options": ["True", "False"], "answer": "False", "note_en": "Street mixtures are unpredictable — that unpredictability is itself the danger.", "note_sn": "Zvakasanganiswa zvemumigwagwa hazvizivikanwe — ndiyo njodzi chaiyo."},
+        {"q_en": "True or False: Stopping guka suddenly with no support is always the safest option.", "q_sn": "Chokwadi kana Nhema: Kurega guka pakarepo pasina rubatsiro ndiko kuchengetedzeka.", "options": ["True", "False"], "answer": "False", "note_en": "Sudden withdrawal can be medically dangerous, including seizures. Supervised support is safer."},
+        {"q_en": "True or False: Cannabis affects everyone in exactly the same way.", "q_sn": "Chokwadi kana Nhema: Mbanje inokanganisa vanhu vese zvakafanana.", "options": ["True", "False"], "answer": "False", "note_en": "Risk varies with personal/family mental health history and other factors."},
+        {"q_en": "True or False: Mixing alcohol and cough syrup increases overdose risk.", "q_sn": "Chokwadi kana Nhema: Kusanganisa doro nemutoriro kunowedzera njodzi.", "options": ["True", "False"], "answer": "True", "note_en": "Both are depressants — combining them compounds the risk to breathing."},
+        {"q_en": "True or False: Talking to a helpline means your name is automatically reported to police.", "q_sn": "Chokwadi kana Nhema: Kutaura nehelpline kunoreva kuti zita rako rinoenda kumapurisa.", "options": ["True", "False"], "answer": "False", "note_en": "Helplines like Childline and NDA-affiliated services are confidential support lines, not automatic police reports."},
+        {"q_en": "True or False: Inhalant misuse can cause a sudden heart problem even the first time.", "q_sn": "Chokwadi kana Nhema: Kunhuwidzana kunogona kukonzera dambudziko remwoyo kunyangwe kekutanga.", "options": ["True", "False"], "answer": "True", "note_en": "\"Sudden sniffing death\" is a real, first-use risk with inhalants."},
+        {"q_en": "True or False: Asking for help is a sign of weakness.", "q_sn": "Chokwadi kana Nhema: Kukumbira rubatsiro chiratidzo cheutera.", "options": ["True", "False"], "answer": "False", "note_en": "Asking for help is one of the most effective things a person can do for their own future."}
+      ]
+    },
+    {
+      "id": "spot_the_risk",
+      "title_en": "Spot the Risk",
+      "title_sn": "Ona Njodzi",
+      "questions": [
+        {"q_en": "A friend seems very confused and dizzy right after huffing glue. What should you do?", "q_sn": "Shamwari yako yanyatsovhunduka uye ichidzungaira mushure mekunhuhwidza glue. Unofanira kuiteiiko?", "options": ["Wait for it to pass", "Treat it as an emergency and call for help", "Give them more air freshener", "Let them sleep it off alone"], "answer": "Treat it as an emergency and call for help", "note_en": "Inhalant reactions can turn dangerous fast."},
+        {"q_en": "Someone mentions they used codeine syrup daily for two weeks and now feels shaky without it. This is:", "q_sn": "Mumwe munhu anoti anga achinwa mutoriro mazuva ese kwemavhiki maviri uye ari kudedera asina. Izvi ndezvei?", "options": ["Normal and nothing to worry about", "A sign of dependence needing medical support", "A joke", "Only a problem if they say so"], "answer": "A sign of dependence needing medical support"},
+        {"q_en": "A message says \"I don't want to live anymore.\" The correct response is:", "q_sn": "Mumwe munhu anoti \"handichada kurarama.\" Mhinduro chaiyo ndeyei?", "options": ["Ignore it, they're probably joking", "Immediately show crisis resources and helplines", "Ask them to calm down and change the subject", "Wait a day to see if they mention it again"], "answer": "Immediately show crisis resources and helplines"},
+        {"q_en": "Which combination carries the highest immediate danger?", "q_sn": "Ndeapi sanganiso ane njodzi huru kupfuura?", "options": ["Cannabis alone", "Alcohol + cough syrup", "Tea + sugar", "Water + exercise"], "answer": "Alcohol + cough syrup"},
+        {"q_en": "A friend wants to try \"pink\" for the first time and asks if it's safe. The honest answer is:", "q_sn": "Shamwari inoda kuedza 'pink' uye inobvunza kana zvakachengetedzeka. Mhinduro yechokwadi ndeyei?", "options": ["Yes, it's just like any other drug", "The contents are unpredictable and the risk is genuinely unknown", "Only unsafe for other people", "It's completely harmless"], "answer": "The contents are unpredictable and the risk is genuinely unknown"},
+        {"q_en": "What is a warning sign that someone needs urgent medical help after stimulant use?", "q_sn": "Chiratidzo chei chinoratidza kuti mumwe munhu anoda rubatsiro rwekukurumidza mushure mekushandisa stimulant?", "options": ["Feeling a bit talkative", "Chest pain or irregular heartbeat", "Feeling hungry", "Wanting to sleep"], "answer": "Chest pain or irregular heartbeat"},
+        {"q_en": "Which of these is the safest first step if you're worried about your own use?", "q_sn": "Ndechipi chinhu chekutanga chakachengetedzeka kana uchinetseka nezve kushandisa kwako?", "options": ["Hide it from everyone", "Reach out to NDA, Friendship Bench or Childline", "Use more to cope with the worry", "Wait until it becomes a bigger problem"], "answer": "Reach out to NDA, Friendship Bench or Childline"},
+        {"q_en": "Age flag: a 13-year-old is chatting about drug use. What should the platform do?", "q_sn": "Mwana wemakore gumi nematatu ari kutaura nezve kushandisa mishonga. Chikwata chinofanira kuiteiiko?", "options": ["Nothing different", "Show a banner encouraging them to talk to a trusted adult, plus Childline 116", "Block them entirely", "Ask for their address"], "answer": "Show a banner encouraging them to talk to a trusted adult, plus Childline 116"}
+      ]
+    },
+    {
+      "id": "help_or_harm",
+      "title_en": "Help or Harm",
+      "title_sn": "Rubatsiro kana Kukuvadza",
+      "questions": [
+        {"q_en": "Telling a friend who uses drugs that they are worthless is:", "q_sn": "Kuudza shamwari inoshandisa mishonga kuti haina basa ndezvei?", "options": ["Helpful, it will scare them straight", "Harmful — stigma pushes people away from help", "Neutral", "Required"], "answer": "Harmful — stigma pushes people away from help"},
+        {"q_en": "Sitting with someone and listening without judgement when they open up is:", "q_sn": "Kugara nemumwe munhu uye kumuteerera pasina kutongwa kana vachikuudza chinhu ndezvei?", "options": ["Helpful", "Harmful", "Pointless", "Illegal"], "answer": "Helpful"},
+        {"q_en": "Sharing someone's private struggle with drugs on social media is:", "q_sn": "Kutaura dambudziko remumwe munhu pamasocial media ndezvei?", "options": ["Helpful, it raises awareness", "Harmful — it breaks trust and privacy", "Required by law", "Encouraged"], "answer": "Harmful — it breaks trust and privacy"},
+        {"q_en": "Connecting a friend to the NDA helpline or Friendship Bench is:", "q_sn": "Kubatanidza shamwari nehelpline yeNDA kana Friendship Bench ndezvei?", "options": ["Helpful", "Harmful", "A waste of time", "Betrayal"], "answer": "Helpful"},
+        {"q_en": "Threatening to tell a friend's parents to force them to stop is generally:", "q_sn": "Kutyisidzira kuudza vabereki veshamwari kuti vamanikidze kurega ndezvei kazhinji?", "options": ["The best approach in every case", "Risky — it can break trust; a caring conversation first is usually better", "Required", "Illegal"], "answer": "Risky — it can break trust; a caring conversation first is usually better"},
+        {"q_en": "Learning the facts about a substance before forming an opinion is:", "q_sn": "Kudzidza chokwadi nezvemushonga usati waita mafungiro ndezvei?", "options": ["Helpful", "Harmful", "Unnecessary", "Dangerous"], "answer": "Helpful"},
+        {"q_en": "Making fun of someone in recovery is:", "q_sn": "Kuseka mumwe munhu ari kubva mukushandisa mishonga ndezvei?", "options": ["Harmful and increases stigma", "Helpful motivation", "Encouraged", "Neutral"], "answer": "Harmful and increases stigma"},
+        {"q_en": "Encouraging someone to reach out to a trusted adult or professional is:", "q_sn": "Kukurudzira mumwe munhu kutaura nemunhu mukuru waanovimba naye kana chiremba ndezvei?", "options": ["Helpful", "Harmful", "Weak", "Pointless"], "answer": "Helpful"}
+      ]
+    }
+  ]
+}

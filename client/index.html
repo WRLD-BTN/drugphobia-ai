@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#12253f" />
+    <script>
+      (function () {
+        try {
+          var saved = localStorage.getItem("drugphobia_theme");
+          var dark = saved ? saved === "dark" : window.matchMedia("(prefers-color-scheme: dark)").matches;
+          if (dark) document.documentElement.classList.add("dark");
+        } catch (e) {}
+      })();
+    </script>
+    <meta name="description" content="DrugPhobia AI — anonymous, multilingual harm-reduction support for Zimbabwean youth." />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <title>DrugPhobia AI</title>
+  </head>
+  <body class="bg-sand text-ink">
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

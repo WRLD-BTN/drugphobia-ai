@@ -1,0 +1,86 @@
+{
+  "_comment": "IMPORTANT: only entries marked verified:true have been cross-checked against a public source during this build (see 'source' field). All other entries are structural placeholders with real institution names but UNVERIFIED contact details, and MUST be confirmed directly with NDA Zimbabwe / MoHCC / the institution before this goes live. Publishing a wrong crisis phone number is a real safety risk — do not skip this step. The admin Resource Manager (see /admin) lets an NGO partner correct and expand this list without a redeploy.",
+  "helplines": [
+    {
+      "id": "childline",
+      "name": "Childline Zimbabwe",
+      "type": "national_helpline",
+      "audience": "Children and youth (0-18, widely used beyond that too)",
+      "phone": "116",
+      "whatsapp": "+263 719 116 116",
+      "hours": "24/7",
+      "verified": true,
+      "source": "https://childline.org.zw/contact-us (confirmed 2 Jul 2026)"
+    },
+    {
+      "id": "nda_helpline",
+      "name": "National Drug Authority (NDA) Zimbabwe",
+      "type": "national_helpline",
+      "audience": "General public, substance use enquiries",
+      "phone": "VERIFY_WITH_NDA — no publicly verifiable toll-free number found during this build; confirm directly with NDA Zimbabwe head office before publishing",
+      "whatsapp": null,
+      "hours": "VERIFY_WITH_NDA",
+      "verified": false,
+      "source": null
+    },
+    {
+      "id": "friendship_bench",
+      "name": "Friendship Bench Zimbabwe",
+      "type": "community_mental_health",
+      "audience": "General public — community-based talk therapy (\"Grandmother/Grandfather\" lay counsellors)",
+      "phone": "VERIFY_WITH_ORG — public sources list an email (info@friendshipbench.io) and Harare office address, not a hotline number; confirm a phone/WhatsApp line with the organisation directly",
+      "whatsapp": null,
+      "hours": "VERIFY_WITH_ORG",
+      "verified": false,
+      "source": "https://www.friendshipbenchzimbabwe.org/contact-us"
+    },
+    {
+      "id": "emergency_services",
+      "name": "Zimbabwe Emergency Services",
+      "type": "emergency",
+      "audience": "Life-threatening emergencies",
+      "phone": "999 / 112",
+      "whatsapp": null,
+      "hours": "24/7",
+      "verified": false,
+      "source": "Widely cited as Zimbabwe's general emergency numbers; confirm current routing with local telco before launch"
+    }
+  ],
+  "facilities": [
+    {
+      "id": "parirenyatwa",
+      "name": "Parirenyatwa Group of Hospitals",
+      "area": "Harare",
+      "province": "Harare",
+      "type": "referral_hospital",
+      "phone": "VERIFY_BEFORE_LAUNCH",
+      "hours": "VERIFY_BEFORE_LAUNCH",
+      "verified": false
+    },
+    {
+      "id": "sally_mugabe",
+      "name": "Sally Mugabe Central Hospital",
+      "area": "Harare",
+      "province": "Harare",
+      "type": "referral_hospital",
+      "phone": "VERIFY_BEFORE_LAUNCH",
+      "hours": "VERIFY_BEFORE_LAUNCH",
+      "verified": false
+    },
+    {
+      "id": "mpilo",
+      "name": "Mpilo Central Hospital",
+      "area": "Bulawayo",
+      "province": "Bulawayo",
+      "type": "referral_hospital",
+      "phone": "VERIFY_BEFORE_LAUNCH",
+      "hours": "VERIFY_BEFORE_LAUNCH",
+      "verified": false
+    }
+  ],
+  "_todo_before_pilot": [
+    "Replace all VERIFY_* placeholders with confirmed numbers from NDA Zimbabwe, MoHCC and each facility directly.",
+    "Expand the facilities list to the full target of ~30 sites across all provinces with an NDA/CIDAZ partner, matching the settlement-type distribution used in Section 1 of the proposal.",
+    "Add GeoJSON coordinates once the verified list is finalised, for the resource-map view."
+  ]
+}

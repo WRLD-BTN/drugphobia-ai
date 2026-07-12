@@ -1,0 +1,71 @@
+{
+  "_comment": "Deterministic triage lexicon. This is the AUTHORITATIVE safety gate — matches here decide RED/YELLOW/GREEN before any AI model is consulted. Keep this human-reviewed and version-controlled. Do not replace this file's role with a model.",
+  "version": "0.1.0",
+  "last_reviewed": "2026-07-02",
+  "red": {
+    "_comment": "Immediate danger. Any match here MUST break the chat and show the full-screen crisis card. Recall on this list is the single most important metric in the whole product.",
+    "en": [
+      "kill myself", "want to die", "end it", "end my life", "suicide", "suicidal",
+      "overdose", "od'd", "took too many", "cut myself", "cutting myself", "self harm",
+      "self-harm", "jump off", "jump from", "can't breathe", "not breathing",
+      "collapsed", "seizure", "convulsing", "unconscious", "no reason to live"
+    ],
+    "sn": [
+      "ndinoda kufa", "ndichazviuraya", "handichada kurarama", "ndaisa mutoriro yakawanda",
+      "ndazvicheka", "handisisade kurarama", "handina chikonzero chekurarama",
+      "haafemi", "arasa hana", "ari kudedera"
+    ],
+    "nd": [
+      "ngizabulala", "angisadi ukuphila", "ngizibulele", "ngizigwaze",
+      "kawusaphefumuli", "uwile phansi", "uyaqhaqhazela"
+    ]
+  },
+  "yellow": {
+    "_comment": "Moderate risk. Show peer chat + helpline buttons, do not break the chat.",
+    "en": [
+      "anxious all the time", "always alone", "using drugs to cope", "everyday",
+      "can't stop using", "addicted", "withdrawal", "shaking without it",
+      "guka everyday", "need it to function", "hiding it from my family"
+    ],
+    "sn": [
+      "ndinotya nguva dzose", "ndiri ndega", "ndinoshandisa mishonga kuti ndifare",
+      "guka mazuva ese", "handikwanise kumira", "ndakabatwa nayo"
+    ],
+    "nd": [
+      "ngihlala ngesaba", "ngihlala ngingedwa", "ngisebenzisa izidakamizwa ukumelana",
+      "angikwazi ukuyeka", "ngibanjiwe yiyo"
+    ]
+  },
+  "green": {
+    "_comment": "Low risk. Offer grounding exercises + WHO educational tips.",
+    "en": ["stressed", "study fatigue", "tired", "bored", "exam stress", "worried about a friend"],
+    "sn": ["ndaneta", "kuneta kwekudzidza", "ndinofinhwa", "kunetsekana nezvebasa rechikoro"],
+    "nd": ["ngidiniwe", "ukukhathala kokufunda", "ngicindezelekile ngesikolo"]
+  },
+  "slang_map": {
+    "_comment": "Maps street slang to the substance category, used for drug_detected tagging and to look up shared/drug_info.json — NOT used to decide risk tier by itself.",
+    "guka": "nyaope_guka",
+    "nyaope": "nyaope_guka",
+    "mutoriro": "codeine_cough_syrup",
+    "broncleer": "codeine_cough_syrup",
+    "bronco": "codeine_cough_syrup",
+    "mbanje": "cannabis",
+    "dagga": "cannabis",
+    "zol": "cannabis",
+    "huffing": "inhalants",
+    "glue": "inhalants",
+    "bronclear": "codeine_cough_syrup",
+    "pink": "pink_cocaine_mix",
+    "crystal": "methamphetamine",
+    "meth": "methamphetamine",
+    "cocaine": "cocaine",
+    "coke": "cocaine"
+  },
+  "dosage_or_sourcing_refusal_triggers": {
+    "_comment": "If a message matches these, the AI layer must refuse and hand off to the fixed refusal string — never generate a response.",
+    "en": ["how much should i take", "how do i inject", "where can i buy", "how do i make",
+           "safe dose of", "how do i cook", "where to get"],
+    "sn": ["ndinotora zvakawanda sei", "ndingaitenga kupi", "ndoibika sei"],
+    "nd": ["ngingayithatha kanganani", "ngingayithenga ngaphi"]
+  }
+}

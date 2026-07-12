@@ -1,0 +1,85 @@
+{
+  "_comment": "Educational content only. No dosage, no synthesis, no sourcing information — by design. Grounded in WHO harm-reduction guidance and NDA Zimbabwe public reporting; content should be reviewed by an NDA/CIDAZ clinical partner before production use.",
+  "substances": [
+    {
+      "id": "cannabis",
+      "name": "Cannabis",
+      "slang_terms": ["mbanje", "dagga", "zol", "weed"],
+      "risks_short_en": "Can affect memory, concentration and motivation; higher risk of anxiety or psychosis in people with a personal or family history of mental illness; smoke inhalation harms the lungs.",
+      "risks_short_sn": "Inogona kukanganisa ndangariro nekufunga; inowedzera njodzi yekufunganya kana pane nhoroondo yehukama yekurwara kwepfungwa; utsi hunokuvadza mapapu.",
+      "harm_reduction_tips_en": "If you choose to use, avoid mixing with alcohol or other depressants, avoid driving, and take breaks between uses. If it starts affecting school, work or relationships, that is a sign to talk to someone.",
+      "harm_reduction_tips_sn": "Kana ukasarudza kushandisa, usasanganisa nedoro kana mimwe mishonga inodzikamisa; usatyaira; zorora pakati penguva dzekushandisa. Kana ikatanga kukanganisa chikoro kana basa, taura nemumwe munhu.",
+      "legal_status_zw": "Illegal under Zimbabwean law outside of licensed medicinal/industrial hemp production."
+    },
+    {
+      "id": "nyaope_guka",
+      "name": "Nyaope / Guka",
+      "slang_terms": ["guka", "nyaope"],
+      "risks_short_en": "A street cocktail (often containing low-grade heroin and other cutting agents) that is highly addictive; stopping suddenly without medical support can cause severe withdrawal, including seizures.",
+      "risks_short_sn": "Inodhaka zvakanyanya; kurega pakarepo pasina rubatsiro rwazvokwadi kunogona kukonzera kudedera kwakanyanya, kusanganisira kufofa.",
+      "harm_reduction_tips_en": "Never use alone. Withdrawal from guka can be medically dangerous — this needs supervised support, not a sudden unsupported stop. Speak to an NDA-affiliated clinic before stopping on your own.",
+      "harm_reduction_tips_sn": "Usaishandisa uri wega. Kurega guka kunogona kuve nengozi kuhutano — tsvaga rubatsiro kuchipatara chine ruzivo rwe NDA usati waedza kurega uri wega.",
+      "legal_status_zw": "Illegal (controlled substance)."
+    },
+    {
+      "id": "codeine_cough_syrup",
+      "name": "Codeine Cough Syrup (\"Mutoriro\")",
+      "slang_terms": ["mutoriro", "broncleer", "bronco"],
+      "risks_short_en": "Contains codeine, an opioid — misuse can cause dangerous slowed breathing, dependence, and organ damage from other ingredients in the syrup; it is not \"safe because it's medicine.\"",
+      "risks_short_sn": "Ine codeine, mushonga we-opioid — kushandisa zvisiri izvo kunogona kukanganisa kufema, kudhaka, uye kukuvadza zvimwe zviropa zvemuviri.",
+      "harm_reduction_tips_en": "This is a myth worth repeating: cough syrup misuse is not automatically safer than other drugs because it comes from a pharmacy. If you or a friend are using large amounts regularly, that is a medical situation.",
+      "harm_reduction_tips_sn": "Kunyorora uku hakuna kuchengetedzeka nekuti kunobva kuchitoro chemishonga. Kana iwe kana shamwari yako muchishandisa zvakawanda nguva dzose, iyi inyaya yehutano inoda rubatsiro.",
+      "legal_status_zw": "Legal as medicine when prescribed/dispensed appropriately; misuse and unregulated resale is illegal."
+    },
+    {
+      "id": "inhalants",
+      "name": "Inhalants (Glue / Paint / Solvents)",
+      "slang_terms": ["huffing", "glue"],
+      "risks_short_en": "Can cause sudden heart problems even on a first use (\"sudden sniffing death\"), brain damage with repeated use, and severe risk when used in enclosed spaces.",
+      "risks_short_sn": "Inogona kukonzera dambudziko rebvudzi rekamwe kamwe kunyangwe pakushandiswa kwekutanga, uye kukuvadza uropi kana zvichiramba zvichishandiswa.",
+      "harm_reduction_tips_en": "This is one of the highest-immediate-risk categories in this list. If someone has just used inhalants and seems confused, dizzy, or is struggling to breathe, treat it as an emergency.",
+      "harm_reduction_tips_sn": "Kana mumwe munhu achangoshandisa uye achiratidza kuvhunduka, kudzungaira, kana kutadza kufema, ibata senyaya inokurumidza kuda rubatsiro.",
+      "legal_status_zw": "Legal to purchase for intended use (e.g. glue, paint); inhalant misuse is not a controlled-substance offence but is treated as a public-health harm."
+    },
+    {
+      "id": "methamphetamine",
+      "name": "Crystal Methamphetamine",
+      "slang_terms": ["crystal", "meth"],
+      "risks_short_en": "Highly addictive stimulant; can cause severe anxiety, paranoia, heart strain, and dental/skin damage with repeated use.",
+      "risks_short_sn": "Inodhaka zvakanyanya uye inogona kukonzera kutya kwakanyanya, kufunganya kusina hunhu, nedambudziko remwoyo.",
+      "harm_reduction_tips_en": "Avoid using alone; stay hydrated and cool if you do use, as overheating is a real risk; talk to NDA if use is becoming frequent.",
+      "harm_reduction_tips_sn": "Usaishandisa uri wega; nwa mvura zhinji uye chengeta muviri wako uchitonhorera.",
+      "legal_status_zw": "Illegal (controlled substance)."
+    },
+    {
+      "id": "cocaine",
+      "name": "Cocaine",
+      "slang_terms": ["coke", "cocaine"],
+      "risks_short_en": "Stimulant with real cardiac risk, including in first-time or occasional users; risk increases sharply when mixed with alcohol.",
+      "risks_short_sn": "Inogona kukuvadza mwoyo kunyangwe pakushandisa kwekutanga; njodzi inowedzera kana zvasanganiswa nedoro.",
+      "harm_reduction_tips_en": "Never mix with alcohol or other stimulants. Chest pain, an irregular heartbeat, or severe agitation after use are emergency signs.",
+      "harm_reduction_tips_sn": "Usasanganisa nedoro. Kurwadziwa muchipfuva, mwoyo kurova zvisina tsika, kana kushatirwa kwakanyanya mushure mekushandisa ndezvekukurumidza kutsvaga rubatsiro.",
+      "legal_status_zw": "Illegal (controlled substance)."
+    },
+    {
+      "id": "pink_cocaine_mix",
+      "name": "\"Pink\" (Tusi / Pink Cocaine Mix)",
+      "slang_terms": ["pink", "tusi"],
+      "risks_short_en": "Street name for an unpredictable mixture that may contain several different drugs — you often cannot know what is actually in it, which makes the risk of a dangerous reaction or overdose especially high.",
+      "risks_short_sn": "Zita rechitoro rezvakasanganiswa zvisingazivikanwe — kazhinji hauzivi zviri mukati, izvi zvinowedzera njodzi yekukuvara kana kudhakwa zvakanyanya.",
+      "harm_reduction_tips_en": "Because contents are unpredictable, the safest information we can give is: the risk is genuinely unknown and higher than single-substance use. If someone becomes unresponsive after using it, treat it as an emergency immediately.",
+      "harm_reduction_tips_sn": "Nekuti zviri mukati hazvizivikanwe, chokwadi chatinogona kukupa ndechekuti njodzi yacho haizivikanwe uye yakakwirira. Kana mumwe munhu akasazokwanisa kupindura mushure mekunwa, ibata sedambudziko rinoda rubatsiro pakarepo.",
+      "legal_status_zw": "Illegal (component substances are controlled)."
+    },
+    {
+      "id": "alcohol",
+      "name": "Alcohol",
+      "slang_terms": ["doro", "utshwala"],
+      "risks_short_en": "Legal but not risk-free — heavy or frequent use affects the liver, mental health, and judgement; mixing with other depressants (including cough syrup) increases overdose risk.",
+      "risks_short_sn": "Rinotenderwa pamutemo asi harina kuchengetedza zvachose — kunwa kwakawandisa kunokanganisa chiropa nehutano hwepfungwa.",
+      "harm_reduction_tips_en": "Never mix with sedatives, opioids, or cough syrup. Pace drinking, eat before and during, and have a friend who is not drinking check in on you.",
+      "harm_reduction_tips_sn": "Usasanganisa nemishonga inodzikamisa kana mutoriro. Nwa zvishoma nezvishoma uye udye chikafu.",
+      "legal_status_zw": "Legal for adults 18+; regulated sale and consumption."
+    }
+  ]
+}

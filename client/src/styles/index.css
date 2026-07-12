@@ -1,0 +1,116 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================
+   DESIGN TOKENS
+   Values are "R G B" triplets (no rgb() wrapper) so Tailwind can
+   apply them with <alpha-value> opacity modifiers, e.g. bg-ink/60.
+   Light and dark are each their own tuned high-contrast palette,
+   not a blind invert — every risk color keeps AA+ contrast against
+   its paired background in both modes.
+   ============================================================ */
+:root {
+  --c-sand: 246 244 238; /* page background — warm off-white */
+  --c-surface: 255 255 255; /* card / panel background */
+  --c-surface-2: 241 236 227; /* nested surface, subtle */
+  --c-clay: 231 221 205; /* chip / pill background */
+  --c-border: 223 213 197;
+  --c-ink: 18 37 63; /* primary text — deep indigo-night */
+  --c-dusk: 31 58 95; /* secondary brand / links */
+  --c-brand: 18 37 63;
+  --c-brand-2: 15 118 110; /* teal accent for progress/highlights */
+
+  --c-green: 27 94 51;
+  --c-green-bg: 232 245 234;
+  --c-yellow: 122 92 0;
+  --c-yellow-bg: 253 243 217;
+  --c-red: 153 27 27;
+  --c-red-bg: 253 234 234;
+
+  /* Crisis screen — deliberately fixed, not theme-swapped. A person in
+     danger should see the exact same unmistakable signal regardless of
+     which theme they had open. */
+  --c-crisis: 220 38 38;
+  --c-crisis-dark: 127 29 29;
+
+  color-scheme: light;
+}
+
+.dark {
+  --c-sand: 12 16 22;
+  --c-surface: 20 26 35;
+  --c-surface-2: 27 35 46;
+  --c-clay: 34 45 59;
+  --c-border: 44 58 75;
+  --c-ink: 237 241 246;
+  --c-dusk: 158 187 224;
+  --c-brand: 237 241 246;
+  --c-brand-2: 45 189 176;
+
+  --c-green: 134 239 172;
+  --c-green-bg: 18 51 34;
+  --c-yellow: 253 224 130;
+  --c-yellow-bg: 58 47 13;
+  --c-red: 252 165 165;
+  --c-red-bg: 58 20 20;
+
+  color-scheme: dark;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  -webkit-tap-highlight-color: transparent;
+  background-color: rgb(var(--c-sand));
+  color: rgb(var(--c-ink));
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Safe-area padding so the bottom nav and crisis actions never sit under
+   a phone's home-indicator / gesture bar. */
+.safe-b {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+.safe-t {
+  padding-top: env(safe-area-inset-top);
+}
+
+/* Thin, theme-aware scrollbar for the chat/feed panes */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(var(--c-border)) transparent;
+}
+*::-webkit-scrollbar {
+  width: 6px;
+}
+*::-webkit-scrollbar-thumb {
+  background-color: rgb(var(--c-border));
+  border-radius: 9999px;
+}
+
+/* Respect reduced-motion preferences throughout the app */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Visible keyboard focus ring everywhere — accessibility floor, not optional */
+:focus-visible {
+  outline: 3px solid rgb(var(--c-brand-2));
+  outline-offset: 2px;
+}
+
+/* Reusable "glass card" surface used across the redesign */
+.card {
+  background-color: rgb(var(--c-surface));
+  border: 1px solid rgb(var(--c-border));
+}

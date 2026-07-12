@@ -1,0 +1,45 @@
+{
+  "_comment": "Rotating educational cards shown in the 'Did You Know?' feed. Grounded in WHO harm-reduction guidance and general public-health knowledge; should be reviewed and updated by an NDA/CIDAZ clinical partner before production use.",
+  "cards": [
+    {
+      "id": "dyk_001",
+      "text_en": "WHO: Stopping guka suddenly without medical support can cause seizures. Withdrawal from opioid-type substances should be medically supervised.",
+      "text_sn": "WHO: Kurega guka pakarepo pasina rubatsiro rwezvokwadi kunogona kukonzera kufofa. Kurega kunofanira kuve nerubatsiro rwechiremba."
+    },
+    {
+      "id": "dyk_002",
+      "text_en": "Inhalant misuse can cause a fatal heart reaction the very first time it's used — there's no such thing as a 'safe' first try.",
+      "text_sn": "Kunhuwidzana kwezvinhu kunogona kukonzera dambudziko remwoyo rinouraya kunyangwe pakuedza kwekutanga."
+    },
+    {
+      "id": "dyk_003",
+      "text_en": "Mixing alcohol with cough syrup (codeine) increases the risk of dangerously slowed breathing — this combination is more dangerous than either substance alone.",
+      "text_sn": "Kusanganisa doro nemutoriro kunowedzera njodzi yekufema zvishoma-shoma — izvi zvine njodzi kupfuura kushandisa chimwe chete."
+    },
+    {
+      "id": "dyk_004",
+      "text_en": "Talking to a trained counsellor is confidential. Childline Zimbabwe's 116 line does not automatically report your name to anyone.",
+      "text_sn": "Kutaura nemupi weruzivo akadzidziswa hakuzivikanwe. Nhare ye116 yeChildline Zimbabwe haitumire zita rako kwaani zvake."
+    },
+    {
+      "id": "dyk_005",
+      "text_en": "The Friendship Bench model started in Mbare, Harare, and uses trained community lay-counsellors to offer free talk therapy on park benches — proven effective in peer-reviewed research.",
+      "text_sn": "Friendship Bench yakatanga kuMbare, Harare, uye inoshandisa vanhu vakadzidziswa munharaunda kupa kurapwa kwemazwi pachena."
+    },
+    {
+      "id": "dyk_006",
+      "text_en": "Street mixtures sold under names like 'pink' often contain an unpredictable combination of substances — you genuinely cannot know what's in them.",
+      "text_sn": "Zvakasanganiswa zvemumigwagwa senge 'pink' kazhinji hazvizivikanwe zviri mukati — hausi kuziva chaizvo."
+    },
+    {
+      "id": "dyk_007",
+      "text_en": "Recovery is possible. Substance dependence is treatable, and reaching out early generally leads to better outcomes than waiting.",
+      "text_sn": "Kubva mukushandisa mishonga kunogoneka. Kutsvaga rubatsiro nekukurumidza kazhinji kunobatsira kupfuura kumirira."
+    },
+    {
+      "id": "dyk_008",
+      "text_en": "Stigma is one of the biggest reasons young people avoid seeking help. A calm, non-judgemental conversation opens more doors than a lecture does.",
+      "text_sn": "Kunyadziswa ndicho chimwe chezvikonzero zvikuru zvinoita kuti vechidiki vasatsvage rubatsiro. Hurukuro dzinyoro dzinovhura mikova kupfuura kutsiura."
+    }
+  ]
+}

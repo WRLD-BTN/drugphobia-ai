@@ -1,0 +1,29 @@
+{
+  "name": "drugphobia-ai",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "DrugPhobia AI monorepo — client (PWA), server (API/Socket.IO), admin (dashboard). Run `npm install` once at the repo root; it installs all three workspaces.",
+  "workspaces": [
+    "client",
+    "server",
+    "admin"
+  ],
+  "scripts": {
+    "setup:env": "node scripts/setup-env.js",
+    "dev:server": "npm run dev -w server",
+    "dev:client": "npm run dev -w client",
+    "dev:admin": "npm run dev -w admin",
+    "dev": "concurrently -n server,client -c blue,green \"npm:dev:server\" \"npm:dev:client\"",
+    "dev:all": "concurrently -n server,client,admin -c blue,green,yellow \"npm:dev:server\" \"npm:dev:client\" \"npm:dev:admin\"",
+    "build:client": "npm run build -w client",
+    "build:admin": "npm run build -w admin",
+    "createAdmin": "npm run createAdmin -w server"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
