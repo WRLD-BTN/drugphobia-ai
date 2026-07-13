@@ -18,6 +18,7 @@ export default function ChatWindow({ lang, sessionHash }) {
   const [ageFlag, setAgeFlag] = useState(false);
   const [connected, setConnected] = useState(false);
   const [offline, setOffline] = useState(!navigator.onLine);
+  const [isTyping, setIsTyping] = useState(false);
   const socketRef = useRef(null);
   const sessionHashRef = useRef(sessionHash || null);
   const listEndRef = useRef(null);
@@ -39,9 +40,15 @@ export default function ChatWindow({ lang, sessionHash }) {
     socket.on("disconnect", () => setConnected(false));
     socket.on("session", ({ sessionHash }) => (sessionHashRef.current = sessionHash));
 
-    socket.on("crisis", (payload) => setCrisis(payload));
+    socket.on("crisis", (payload) => {
+      setIsTyping(false);
+      setCrisis(payload);
+    });
+
+    socket.on("typing", ({ typing }) => setIsTyping(!!typing));
 
     socket.on("reply", (payload) => {
+      setIsTyping(false);
       if (payload.ageFlag) setAgeFlag(true);
       setMessages((prev) => [
         ...prev,
@@ -58,7 +65,7 @@ export default function ChatWindow({ lang, sessionHash }) {
 
   useEffect(() => {
     listEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages, crisis]);
+  }, [messages, crisis, isTyping]);
 
   const handleSend = useCallback(() => {
     const text = input.trim();
@@ -151,6 +158,7 @@ export default function ChatWindow({ lang, sessionHash }) {
         {messages.map((m, i) => (
           <MessageBubble key={i} message={m} lang={lang} />
         ))}
+        {isTyping && <TypingBubble />}
         <div ref={listEndRef} />
       </div>
 
@@ -170,6 +178,18 @@ export default function ChatWindow({ lang, sessionHash }) {
         >
           <SendHorizontal size={18} strokeWidth={2.25} />
         </button>
+      </div>
+    </div>
+  );
+}
+
+function TypingBubble() {
+  return (
+    <div className="flex justify-start animate-fade-up">
+      <div className="card bg-surface rounded-2xl rounded-bl-md px-4 py-3 shadow-card flex items-center gap-1">
+        <span className="w-1.5 h-1.5 rounded-full bg-ink/40 animate-bounce [animation-delay:-0.3s]" />
+        <span className="w-1.5 h-1.5 rounded-full bg-ink/40 animate-bounce [animation-delay:-0.15s]" />
+        <span className="w-1.5 h-1.5 rounded-full bg-ink/40 animate-bounce" />
       </div>
     </div>
   );

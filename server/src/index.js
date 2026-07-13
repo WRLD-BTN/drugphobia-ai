@@ -55,6 +55,14 @@ io.on("connection", (socket) => {
   const sessionHash = socket.handshake.auth?.sessionHash || newSessionHash();
   socket.emit("session", { sessionHash });
 
+  // Short-term, in-memory only conversation history for this ONE socket
+  // connection — never written to disk, never sent anywhere else. Lets the
+  // guarded AI layer respond like it's actually following the conversation
+  // instead of treating every message as a cold start. Capped so a long
+  // chat can't grow the prompt (and therefore API cost/latency) unbounded.
+  const history = [];
+  const MAX_HISTORY_TURNS = 6;
+
   socket.on("message", async (payload) => {
     try {
       const text = sanitiseText(payload?.text || "");
@@ -88,6 +96,7 @@ io.on("connection", (socket) => {
           ],
           lockUntil: "I'm safe now",
         });
+        history.length = 0; // don't carry crisis context forward once resolved
         return; // chat is broken — no further AI response for a RED message
       }
 
@@ -104,10 +113,21 @@ io.on("connection", (socket) => {
         return;
       }
 
-      const aiResult = await generateResponse({ text, lang });
+      // Let the client show a "typing" indicator while the AI layer (or
+      // offline fallback) puts a reply together — matters most when a real
+      // LLM call is in flight, since that round-trip isn't instant.
+      socket.emit("typing", { typing: true });
+
+      const aiResult = await generateResponse({ text, lang, history });
+      history.push({ role: "user", content: text });
+      history.push({ role: "assistant", content: aiResult.text });
+      while (history.length > MAX_HISTORY_TURNS * 2) history.shift();
+
+      socket.emit("typing", { typing: false });
       socket.emit("reply", { tier: "GREEN", text: aiResult.text, mode: aiResult.mode, ageFlag: !!ageFlag });
     } catch (err) {
       console.error("[socket] error handling message:", err);
+      socket.emit("typing", { typing: false });
       socket.emit("reply", { tier: "GREEN", text: "Something went wrong on my end — please try again." });
     }
   });
