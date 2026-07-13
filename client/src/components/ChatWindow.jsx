@@ -3,11 +3,12 @@ import { io } from "socket.io-client";
 import { SendHorizontal, WifiOff } from "lucide-react";
 import { classifyLocal, detectAgeFlagLocal } from "../classifier/triageClient.js";
 import { t } from "../i18n/strings.js";
+import { apiUrl, getSocketUrl } from "../api.js";
 import CrisisCard from "./CrisisCard.jsx";
 import AgeBanner from "./AgeBanner.jsx";
 import { ChatGreetingIllustration } from "./Illustrations.jsx";
 
-const SERVER_URL = import.meta.env.VITE_SERVER_URL || "http://localhost:4000";
+const SERVER_URL = getSocketUrl() || window.location.origin;
 
 export default function ChatWindow({ lang, sessionHash }) {
   const [messages, setMessages] = useState([
@@ -32,12 +33,21 @@ export default function ChatWindow({ lang, sessionHash }) {
     const socket = io(SERVER_URL, {
       autoConnect: true,
       reconnection: true,
+      transports: ["websocket", "polling"],
+      path: "/socket.io",
       auth: { sessionHash: sessionHashRef.current },
     });
     socketRef.current = socket;
 
-    socket.on("connect", () => setConnected(true));
-    socket.on("disconnect", () => setConnected(false));
+    const handleConnect = () => {
+      setConnected(true);
+      setOffline(!navigator.onLine);
+    };
+    const handleDisconnect = () => setConnected(false);
+
+    socket.on("connect", handleConnect);
+    socket.on("connect_error", handleDisconnect);
+    socket.on("disconnect", handleDisconnect);
     socket.on("session", ({ sessionHash }) => (sessionHashRef.current = sessionHash));
 
     socket.on("crisis", (payload) => {
@@ -67,14 +77,52 @@ export default function ChatWindow({ lang, sessionHash }) {
     listEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, crisis, isTyping]);
 
+  const handleHttpReply = useCallback(
+    async (text, langCode) => {
+      setIsTyping(true);
+      try {
+        const response = await fetch(apiUrl("/api/chat"), {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ text, lang: langCode, sessionHash: sessionHashRef.current }),
+        });
+        const payload = await response.json();
+        if (payload.sessionHash) sessionHashRef.current = payload.sessionHash;
+        if (payload.ageFlag) setAgeFlag(true);
+
+        if (payload.tier === "RED" || payload.crisisCard) {
+          setCrisis(payload.crisisCard || {
+            heading: t(langCode, "crisisHeading"),
+            actions: [
+              { label: "Childline 116", type: "call", value: "116" },
+              { label: "Childline WhatsApp", type: "whatsapp", value: "+263719116116" },
+              { label: "NDA Helpline (verify)", type: "call", value: "0808 20 20" },
+            ],
+          });
+          return;
+        }
+
+        setMessages((prev) => [
+          ...prev,
+          { from: "bot", text: payload.text, tier: payload.tier, actions: payload.actions },
+        ]);
+      } catch {
+        setMessages((prev) => [
+          ...prev,
+          { from: "bot", tier: "GREEN", text: offlineGreenReply(langCode) },
+        ]);
+      } finally {
+        setIsTyping(false);
+      }
+    },
+    []
+  );
+
   const handleSend = useCallback(() => {
     const text = input.trim();
     if (!text) return;
     setInput("");
 
-    // Instant local-first triage for immediate UI feedback, especially
-    // important when offline. The server re-checks the same message as the
-    // authoritative gate the moment it arrives (see index.js).
     const localGate = classifyLocal(text);
     const localAge = detectAgeFlagLocal(text);
     if (localAge) setAgeFlag(true);
@@ -82,9 +130,6 @@ export default function ChatWindow({ lang, sessionHash }) {
     setMessages((prev) => [...prev, { from: "user", text }]);
 
     if (localGate.tier === "RED") {
-      // Show the crisis card immediately from the local classifier — don't
-      // wait on a round-trip if the connection is slow or offline. The
-      // socket 'crisis' event (if it arrives) will just confirm the same UI.
       setCrisis({
         heading: t(lang, "crisisHeading"),
         actions: [
@@ -93,26 +138,17 @@ export default function ChatWindow({ lang, sessionHash }) {
           { label: "NDA Helpline (verify)", type: "call", value: "0808 20 20" },
         ],
       });
+      return;
     }
 
-    if (connected && socketRef.current) {
+    if (socketRef.current?.connected) {
       socketRef.current.emit("message", { text, lang });
-    } else {
-      // Fully offline fallback: at minimum, the local classifier still
-      // caught RED/YELLOW/GREEN, so the person isn't left with silence.
-      setMessages((prev) => [
-        ...prev,
-        {
-          from: "bot",
-          tier: localGate.tier,
-          text:
-            localGate.tier === "GREEN"
-              ? offlineGreenReply(lang)
-              : "",
-        },
-      ]);
+      setIsTyping(true);
+      return;
     }
-  }, [input, connected, lang]);
+
+    handleHttpReply(text, lang);
+  }, [input, lang, handleHttpReply]);
 
   const handleReferralClick = () => {
     if (sessionHashRef.current) {
@@ -211,15 +247,21 @@ function MessageBubble({ message, lang }) {
         {message.text}
         {message.actions?.length > 0 && (
           <div className="mt-2 flex flex-wrap gap-2">
-            {message.actions.map((a) => (
-              <a
-                key={a.label}
-                href={a.type === "call" ? `tel:${a.value?.replace(/\s+/g, "")}` : "#"}
-                className="text-xs font-semibold underline text-brand-2"
-              >
-                {a.label}
-              </a>
-            ))}
+            {message.actions.map((a) => {
+              const href =
+                a.type === "call"
+                  ? `tel:${a.value?.replace(/\s+/g, "")}`
+                  : a.type === "whatsapp"
+                  ? `https://wa.me/${a.value?.replace(/\D/g, "")}`
+                  : a.type === "sms"
+                  ? `sms:${a.value}`
+                  : "#";
+              return (
+                <a key={a.label} href={href} className="text-xs font-semibold underline text-brand-2">
+                  {a.label}
+                </a>
+              );
+            })}
           </div>
         )}
       </div>

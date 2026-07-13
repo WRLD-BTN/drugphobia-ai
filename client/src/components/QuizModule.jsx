@@ -1,55 +1,76 @@
 import { useEffect, useState } from "react";
-import { ChevronRight, CheckCircle2, XCircle } from "lucide-react";
+import { ChevronRight, CheckCircle2, RotateCcw, XCircle } from "lucide-react";
 import { t } from "../i18n/strings.js";
+import { apiUrl } from "../api.js";
+import quizBankData from "../../../shared/quiz_bank.json";
 import { QuizAwardIllustration } from "./Illustrations.jsx";
 
-const SERVER_URL = import.meta.env.VITE_SERVER_URL || "http://localhost:4000";
-
 export default function QuizModule({ lang, sessionHash }) {
-  const [bank, setBank] = useState(null);
+  const [bank, setBank] = useState(quizBankData);
   const [moduleIdx, setModuleIdx] = useState(null);
   const [qIdx, setQIdx] = useState(0);
   const [score, setScore] = useState(0);
   const [selected, setSelected] = useState(null);
   const [done, setDone] = useState(false);
+  const [statusMessage, setStatusMessage] = useState("");
 
   useEffect(() => {
-    fetch(`${SERVER_URL}/api/quiz`)
+    let active = true;
+    fetch(apiUrl("/api/quiz"))
       .then((r) => r.json())
-      .then(setBank)
-      .catch(() => setBank(null));
-  }, []);
+      .then((data) => {
+        if (active && data?.modules?.length) {
+          setBank(data);
+          setStatusMessage("");
+        }
+      })
+      .catch(() => {
+        if (active) setStatusMessage(t(lang, "quizOffline"));
+      });
+    return () => {
+      active = false;
+    };
+  }, [lang]);
 
-  if (!bank) {
-    return <p className="p-4 text-sm text-ink/60">Loading quiz…</p>;
+  const startModule = (index) => {
+    setModuleIdx(index);
+    setQIdx(0);
+    setScore(0);
+    setDone(false);
+    setSelected(null);
+    setStatusMessage("");
+  };
+
+  if (!bank?.modules?.length) {
+    return <p className="p-4 text-sm text-ink/60">{statusMessage || t(lang, "quizLoading")}</p>;
   }
 
   if (moduleIdx === null) {
     return (
       <div className="p-4 space-y-3 h-full overflow-y-auto">
         <h2 className="text-lg font-bold">{t(lang, "navQuiz")}</h2>
-        {bank.modules.map((m, i) => (
-          <button
-            key={m.id}
-            onClick={() => {
-              setModuleIdx(i);
-              setQIdx(0);
-              setScore(0);
-              setDone(false);
-              setSelected(null);
-            }}
-            className="w-full text-left rounded-xl2 card bg-surface hover:border-brand-2/40 p-4 transition-colors flex items-center gap-3 shadow-card"
-          >
-            <div className="w-10 h-10 rounded-xl bg-brand-2/15 text-brand-2 flex items-center justify-center font-bold text-sm shrink-0">
-              {i + 1}
-            </div>
-            <div className="flex-1 min-w-0">
-              <p className="font-semibold truncate">{lang === "sn" ? m.title_sn : m.title_en}</p>
-              <p className="text-xs text-ink/55 mt-0.5">{m.questions.length} questions</p>
-            </div>
-            <ChevronRight size={18} className="text-ink/30 shrink-0" />
-          </button>
-        ))}
+        <p className="text-sm text-ink/60">{t(lang, "quizChooseModule")}</p>
+        {bank.modules.map((m, i) => {
+          const moduleTitle = lang === "sn" ? m.title_sn || m.title_en : m.title_en || m.title_sn;
+          const moduleSummary = lang === "sn" ? m.summary_sn || m.summary_en : m.summary_en || m.summary_sn;
+          return (
+            <button
+              key={m.id}
+              onClick={() => startModule(i)}
+              className="w-full text-left rounded-2xl card bg-surface hover:border-brand-2/40 p-4 transition-colors flex items-center gap-3 shadow-card"
+            >
+              <div className="w-10 h-10 rounded-xl bg-brand-2/15 text-brand-2 flex items-center justify-center font-bold text-sm shrink-0">
+                {i + 1}
+              </div>
+              <div className="flex-1 min-w-0">
+                <p className="font-semibold truncate">{moduleTitle}</p>
+                <p className="text-xs text-ink/55 mt-0.5">{moduleSummary}</p>
+                <p className="text-[11px] text-brand-2 mt-1">{m.questions.length} {t(lang, "quizQuestions")}</p>
+              </div>
+              <ChevronRight size={18} className="text-ink/30 shrink-0" />
+            </button>
+          );
+        })}
       </div>
     );
   }
@@ -67,17 +88,27 @@ export default function QuizModule({ lang, sessionHash }) {
         <p className="text-4xl font-extrabold text-ink mb-6">
           {score} / {total}
         </p>
-        <button
-          onClick={() => setModuleIdx(null)}
-          className="rounded-full bg-ink text-sand px-6 py-2.5 text-sm font-semibold active:scale-95 transition-transform"
-        >
-          {t(lang, "quizRetake")}
-        </button>
+        <div className="flex flex-wrap justify-center gap-3">
+          <button
+            onClick={() => startModule(moduleIdx)}
+            className="rounded-full bg-ink text-sand px-6 py-2.5 text-sm font-semibold active:scale-95 transition-transform flex items-center gap-2"
+          >
+            <RotateCcw size={16} />
+            {t(lang, "quizRetake")}
+          </button>
+          <button
+            onClick={() => setModuleIdx(null)}
+            className="rounded-full border border-border bg-surface px-6 py-2.5 text-sm font-semibold active:scale-95 transition-transform"
+          >
+            {t(lang, "quizAnother")}
+          </button>
+        </div>
       </div>
     );
   }
 
-  const questionText = lang === "sn" ? question.q_sn || question.q_en : question.q_en;
+  const questionText = lang === "sn" ? question.q_sn || question.q_en : question.q_en || question.q_sn;
+  const noteText = lang === "sn" ? question.note_sn || question.note_en : question.note_en || question.note_sn;
   const progress = ((qIdx + (selected !== null ? 1 : 0)) / module.questions.length) * 100;
 
   return (
@@ -120,21 +151,29 @@ export default function QuizModule({ lang, sessionHash }) {
 
       {selected !== null && (
         <div className="mt-4">
-          {question.note_en && <p className="text-xs text-ink/60 mb-3 leading-relaxed">{question.note_en}</p>}
-          <button
-            onClick={() => {
-              if (selected === question.answer) setScore((s) => s + 1);
-              if (qIdx + 1 < module.questions.length) {
-                setQIdx((i) => i + 1);
-                setSelected(null);
-              } else {
-                setDone(true);
-              }
-            }}
-            className="rounded-full bg-ink text-sand px-6 py-2.5 text-sm font-semibold active:scale-95 transition-transform"
-          >
-            {qIdx + 1 < module.questions.length ? "Next" : "See score"}
-          </button>
+          {noteText && <p className="text-xs text-ink/60 mb-3 leading-relaxed">{noteText}</p>}
+          <div className="flex flex-wrap gap-3">
+            <button
+              onClick={() => setModuleIdx(null)}
+              className="rounded-full border border-border bg-surface px-4 py-2.5 text-sm font-semibold active:scale-95 transition-transform"
+            >
+              {t(lang, "quizBack")}
+            </button>
+            <button
+              onClick={() => {
+                if (selected === question.answer) setScore((s) => s + 1);
+                if (qIdx + 1 < module.questions.length) {
+                  setQIdx((i) => i + 1);
+                  setSelected(null);
+                } else {
+                  setDone(true);
+                }
+              }}
+              className="rounded-full bg-ink text-sand px-6 py-2.5 text-sm font-semibold active:scale-95 transition-transform"
+            >
+              {qIdx + 1 < module.questions.length ? t(lang, "quizNext") : t(lang, "quizSeeScore")}
+            </button>
+          </div>
         </div>
       )}
     </div>
@@ -146,7 +185,7 @@ function submitScore(sessionHash, moduleId, score, total) {
   const key = `${sessionHash}:${moduleId}`;
   if (alreadySubmitted.has(key)) return;
   alreadySubmitted.add(key);
-  fetch(`${SERVER_URL}/api/quiz/submit`, {
+  fetch(apiUrl("/api/quiz/submit"), {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ sessionHash, moduleId, score, total }),

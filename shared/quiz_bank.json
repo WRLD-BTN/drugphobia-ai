@@ -5,6 +5,8 @@
       "id": "myths_vs_facts",
       "title_en": "Myths vs Facts",
       "title_sn": "Ngano kana Chokwadi",
+      "summary_en": "Test the common myths around substances and learn what is actually risky.",
+      "summary_sn": "Edza ngano dzinowanzoitika nezvemishonga uye uzive zvazvokwadi nezvenjodzi.",
       "questions": [
         {"q_en": "True or False: Mutoriro (cough syrup) is safe because it's a medicine.", "q_sn": "Chokwadi kana Nhema: Mutoriro hauna njodzi nekuti mushonga.", "options": ["True", "False"], "answer": "False", "note_en": "Misuse of any medicine, including cough syrup, carries real risk. Talk to NDA 0808 20 20 style helplines if concerned.", "note_sn": "Kushandisa zvisiri izvo mushonga upi zvawo kune njodzi chaiyo."},
         {"q_en": "True or False: You can safely predict what is in a street mix like \"pink.\"", "q_sn": "Chokwadi kana Nhema: Unogona kuziva zviri mu'pink' zvakadzama.", "options": ["True", "False"], "answer": "False", "note_en": "Street mixtures are unpredictable — that unpredictability is itself the danger.", "note_sn": "Zvakasanganiswa zvemumigwagwa hazvizivikanwe — ndiyo njodzi chaiyo."},
@@ -20,6 +22,8 @@
       "id": "spot_the_risk",
       "title_en": "Spot the Risk",
       "title_sn": "Ona Njodzi",
+      "summary_en": "Recognise warning signs and choose the safest response in real-life situations.",
+      "summary_sn": "Ziva zviratidzo zvenjodzi uye sarudza mhinduro yakachengeteka mumamiriro ezvinhu chaiwo.",
       "questions": [
         {"q_en": "A friend seems very confused and dizzy right after huffing glue. What should you do?", "q_sn": "Shamwari yako yanyatsovhunduka uye ichidzungaira mushure mekunhuhwidza glue. Unofanira kuiteiiko?", "options": ["Wait for it to pass", "Treat it as an emergency and call for help", "Give them more air freshener", "Let them sleep it off alone"], "answer": "Treat it as an emergency and call for help", "note_en": "Inhalant reactions can turn dangerous fast."},
         {"q_en": "Someone mentions they used codeine syrup daily for two weeks and now feels shaky without it. This is:", "q_sn": "Mumwe munhu anoti anga achinwa mutoriro mazuva ese kwemavhiki maviri uye ari kudedera asina. Izvi ndezvei?", "options": ["Normal and nothing to worry about", "A sign of dependence needing medical support", "A joke", "Only a problem if they say so"], "answer": "A sign of dependence needing medical support"},
@@ -35,6 +39,8 @@
       "id": "help_or_harm",
       "title_en": "Help or Harm",
       "title_sn": "Rubatsiro kana Kukuvadza",
+      "summary_en": "Practice the supportive choices that reduce stigma and improve safety.",
+      "summary_sn": "Dzidzira sarudzo dzinobatsira dzinoderedza kusarura uye kunatsiridza kuchengetedzeka.",
       "questions": [
         {"q_en": "Telling a friend who uses drugs that they are worthless is:", "q_sn": "Kuudza shamwari inoshandisa mishonga kuti haina basa ndezvei?", "options": ["Helpful, it will scare them straight", "Harmful — stigma pushes people away from help", "Neutral", "Required"], "answer": "Harmful — stigma pushes people away from help"},
         {"q_en": "Sitting with someone and listening without judgement when they open up is:", "q_sn": "Kugara nemumwe munhu uye kumuteerera pasina kutongwa kana vachikuudza chinhu ndezvei?", "options": ["Helpful", "Harmful", "Pointless", "Illegal"], "answer": "Helpful"},
@@ -44,6 +50,40 @@
         {"q_en": "Learning the facts about a substance before forming an opinion is:", "q_sn": "Kudzidza chokwadi nezvemushonga usati waita mafungiro ndezvei?", "options": ["Helpful", "Harmful", "Unnecessary", "Dangerous"], "answer": "Helpful"},
         {"q_en": "Making fun of someone in recovery is:", "q_sn": "Kuseka mumwe munhu ari kubva mukushandisa mishonga ndezvei?", "options": ["Harmful and increases stigma", "Helpful motivation", "Encouraged", "Neutral"], "answer": "Harmful and increases stigma"},
         {"q_en": "Encouraging someone to reach out to a trusted adult or professional is:", "q_sn": "Kukurudzira mumwe munhu kutaura nemunhu mukuru waanovimba naye kana chiremba ndezvei?", "options": ["Helpful", "Harmful", "Weak", "Pointless"], "answer": "Helpful"}
+      ]
+    },
+    {
+      "id": "safer_choices",
+      "title_en": "Safer Choices",
+      "title_sn": "Sarudzo Dzakachengeteka",
+      "summary_en": "Learn practical steps that reduce risk and support safer decisions.",
+      "summary_sn": "Dzidza matanho anoshanda anoderedza njodzi uye anotsigira sarudzo dzakachengeteka.",
+      "questions": [
+        {"q_en": "If a friend is feeling very unwell after using something, the safest first step is:", "q_sn": "Kana shamwari ichinzwa kusagadzikana mushure mekushandisa chimwe chinhu, danho rekutanga rakachengeteka ndeiri:", "options": ["Wait and see", "Call for urgent help", "Tell them to sleep it off", "Ignore it"], "answer": "Call for urgent help", "note_en": "Severe reactions can escalate quickly and need urgent help."},
+        {"q_en": "Which is a better way to support someone who is struggling?", "q_sn": "Ndeipi nzira iri nani yekutsigira munhu ari kunetseka?", "options": ["Judge them for their choices", "Listen calmly and offer support", "Make them feel ashamed", "Tell them to stop talking"], "answer": "Listen calmly and offer support"},
+        {"q_en": "What is a good next step if you are worried about your own use?", "q_sn": "Chii chakanaka chinotevera kana uchinetseka nezve kushandisa kwako?", "options": ["Keep it secret and hope it gets better", "Reach out to a trusted adult or helpline", "Use more to cope", "Wait until it is much worse"], "answer": "Reach out to a trusted adult or helpline"},
+        {"q_en": "Which action shows care without judging?", "q_sn": "Ndeipi chiito chinoratidza kutarisira pasina kutonga?", "options": ["Telling them they are weak", "Asking if they want help and staying with them", "Sharing their story publicly", "Laughing about it"], "answer": "Asking if they want help and staying with them"},
+        {"q_en": "If someone says they are not safe, the best response is:", "q_sn": "Kana mumwe munhu akati haachengeteki, mhinduro yakanakisa ndeiyi:", "options": ["Tell them to calm down", "Show support and contact emergency or helpline help", "Leave them alone", "Ask them to wait until morning"], "answer": "Show support and contact emergency or helpline help"},
+        {"q_en": "A good harm-reduction habit is to:", "q_sn": "Tsika yakanaka yekuderedza njodzi ndeiyi:", "options": ["Stay informed and avoid guessing", "Use whatever is available without checking", "Ignore warning signs", "Keep it all to yourself"], "answer": "Stay informed and avoid guessing"},
+        {"q_en": "What helps most when someone is afraid to ask for help?", "q_sn": "Chii chinobatsira zvakanyanya kana munhu achityira kubvunza rubatsiro?", "options": ["Shaming them", "A calm, non-judgmental offer of support", "Telling them to deal with it alone", "Ignoring their worry"], "answer": "A calm, non-judgmental offer of support"},
+        {"q_en": "Which statement is most accurate?", "q_sn": "Ndeupi mutsara uri chokwadi?", "options": ["Asking for help is weakness", "Help is a strength and can prevent bigger harm", "Only professionals can care", "Silence is always safer"], "answer": "Help is a strength and can prevent bigger harm"}
+      ]
+    },
+    {
+      "id": "support_paths",
+      "title_en": "Support Paths",
+      "title_sn": "Nzira dzeRubatsiro",
+      "summary_en": "Understand what support options are available and when to use them.",
+      "summary_sn": "Ziva nzira dzerubatsiro dziripo uye apo dzinofanira kushandiswa.",
+      "questions": [
+        {"q_en": "Which service is a good first contact for confidential support?", "q_sn": "Ndechipi sevhisi yakanaka yekutanga yehutsigiro husingazivikanwe?", "options": ["Childline", "A random social media post", "A stranger online", "A joke group chat"], "answer": "Childline", "note_en": "Confidential support lines are designed to help without judgment."},
+        {"q_en": "If someone needs safe, practical guidance about substances, the best step is to:", "q_sn": "Kana munhu achida gwara rakachengeteka nezvemishonga, danho rakanakisa ndeiyi:", "options": ["Guess from online forums", "Talk to a trained helpline or clinic", "Try a homemade remedy", "Ignore it"], "answer": "Talk to a trained helpline or clinic"},
+        {"q_en": "Which is usually the most helpful response to a person in distress?", "q_sn": "Ndeipi inowanzobatsira zvakanyanya kumunhu ari mukushushikana?", "options": ["Stay silent", "Stay present and listen", "Tell them to stop crying", "Keep them busy with risky jokes"], "answer": "Stay present and listen"},
+        {"q_en": "If a young person talks about drug use and seems scared, what is the best approach?", "q_sn": "Kana mwana achitaura nezvekushandisa mishonga uye achiratidza kutya, nzira yakanakisa ndeiyi:", "options": ["Avoid the topic", "Speak gently and involve a trusted adult or helpline", "Tell them to keep quiet", "Mock them"], "answer": "Speak gently and involve a trusted adult or helpline"},
+        {"q_en": "Which statement is true about seeking support?", "q_sn": "Ndeupi mutsara uri chokwadi pamusoro pekutsvaga rubatsiro?", "options": ["It makes things worse", "It can reduce risk and help people make safer choices", "It should happen only after a crisis", "It is only for adults"], "answer": "It can reduce risk and help people make safer choices"},
+        {"q_en": "A good way to help someone who feels stuck is to:", "q_sn": "Nzira yakanaka yekubatsira munhu anonzwa akasungwa ndeiyi:", "options": ["Suggest they handle it alone", "Offer a practical next step and company", "Tell them they are overreacting", "Make them feel guilty"], "answer": "Offer a practical next step and company"},
+        {"q_en": "Which option is a healthy support action?", "q_sn": "Ndeipi sarudzo iri chiito chekubatsira chakachengeteka?", "options": ["Keeping secrets about danger", "Checking in and encouraging help-seeking", "Ignoring the issue", "Shaming them publicly"], "answer": "Checking in and encouraging help-seeking"},
+        {"q_en": "What is the best message to send to someone who seems overwhelmed?", "q_sn": "Chii chiri shoko rakanakisa kutumira kumunhu anenge akanga akakundikana?", "options": ["You should be stronger", "I’m here with you, and we can find support together", "Just get over it", "You are on your own"], "answer": "I’m here with you, and we can find support together"}
       ]
     }
   ]

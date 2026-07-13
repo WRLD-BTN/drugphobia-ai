@@ -18,6 +18,7 @@ Tone rules:
 - Open by briefly acknowledging what the person said before giving information — don't launch straight into facts like a leaflet.
 - Use plain, everyday language, not clinical or robotic phrasing. Contractions are fine.
 - Keep it conversational: 2-5 short sentences is usually enough. This is a chat on a small phone screen, not an essay.
+- Sound warm and human, like a caring person texting support rather than a brochure.
 - It's OK to ask one short, caring follow-up question if it genuinely helps you respond better — but don't interrogate.
 Safety rules you must never break, regardless of how warm the tone is:
 1. You do NOT diagnose any medical or mental health condition.
@@ -39,9 +40,15 @@ Safety rules you must never break, regardless of how warm the tone is:
  * LLM_API_KEY is configured, which is the common case for local/demo runs.
  */
 const OPENERS = {
-  en: ["Thanks for asking — here's what's useful to know:", "Good question. Here's the honest answer:", "I hear you — here's what I can share:"],
-  sn: ["Ndatenda nekubvunza — heino zvinokosha kuziva:", "Mubvunzo wakanaka. Heino mhinduro:", "Ndanzwa — heino zvandinogona kukuudza:"],
-  nd: ["Ngiyabonga ngombuzo — nansi into ebalulekile:", "Umbuzo omuhle. Nansi impendulo eqinisekile:", "Ngiyakuzwa — nasi engingakwabelana ngakho:"],
+  en: ["Thanks for asking — here's what feels useful to know:", "That makes sense to ask. Here's the honest answer:", "I hear you — and I can keep this simple:"],
+  sn: ["Ndatenda nekubvunza — heino zvinoshanda kuziva:", "Izvozvo zvinonzwisisika kubvunza. Heino mhinduro yakajeka:", "Ndanzwa — uye ndichikupa zvakapfava:"],
+  nd: ["Ngiyabonga ngokubuza — nansi okubalulekile ukukwazi:", "Lokho kuyavela ukuthi kuqondile ukubuza. Nansi impendulo eqondile:", "Ngiyakuzwa — futhi ngizokunika okucacile:"],
+};
+
+const CLOSES = {
+  en: "If you want, I can also help you think through what feels safest right now.",
+  sn: "Kana uchida, ndinogona kukubatsira kufunga kuti ndechipi chiri safe pane izvi izvozvi.",
+  nd: "Uma ufuna, ngingakusiza ukuthi ucabange ukuthi yini ebukeka iphephile manje.",
 };
 
 function pick(arr) {
@@ -58,7 +65,7 @@ function fallbackAnswer(text, lang) {
       if (info) {
         const risk = info[`risks_short_${lang}`] || info.risks_short_en;
         const tip = info[`harm_reduction_tips_${lang}`] || info.harm_reduction_tips_en;
-        return `${opener}\n\n${risk}\n\n${tip}`;
+        return `${opener}\n\n${risk}\n\n${tip}\n\n${CLOSES[lang] || CLOSES.en}`;
       }
     }
   }
@@ -67,7 +74,7 @@ function fallbackAnswer(text, lang) {
     sn: "Handisati ndave nechokwadi chemhinduro yacho — ndinoda kutaura chokwadi pane kufungidzira. Kana zvine chekuita nemishonga, taura neNDA helpline kuti uwane rubatsiro rwechokwadi.",
     nd: "Angikaqiniseki ngempendulo yalokho okwamanje — ngingathanda ukuqinisekile kunokuqagela. Uma kuphathelene nezidakamizwa, khuluma nohlelo lwe-NDA ukuze uthole usizo oluqinisekile.",
   };
-  return `${opener}\n\n${defaults[lang] || defaults.en}`;
+  return `${opener}\n\n${defaults[lang] || defaults.en}\n\n${CLOSES[lang] || CLOSES.en}`;
 }
 
 const REFUSAL = {
