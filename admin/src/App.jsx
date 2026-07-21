@@ -1,50 +1,91 @@
-import { Routes, Route, Navigate, Link, useLocation } from "react-router-dom";
-import { isLoggedIn } from "./api.js";
-import Login from "./pages/Login.jsx";
-import Dashboard from "./pages/Dashboard.jsx";
-import Moderation from "./pages/Moderation.jsx";
-import ResourceManager from "./pages/ResourceManager.jsx";
+const express = require('express');
+const cors = require('cors');
+const helmet = require('helmet');
+const morgan = require('morgan');
+const rateLimit = require('express-rate-limit');
+const swaggerUi = require('swagger-ui-express');
 
-function RequireAuth({ children }) {
-  if (!isLoggedIn()) return <Navigate to="/login" replace />;
-  return children;
-}
+const swaggerSpec = require('./docs/swagger');
+const errorHandler = require('./middleware/errorHandler');
 
-export default function App() {
-  const location = useLocation();
-  const showSidebar = isLoggedIn() && location.pathname !== "/login";
+const authRoutes = require('./routes/auth.routes');
+const tournamentRoutes = require('./routes/tournament.routes');
+const teamRoutes = require('./routes/team.routes');
+const tournamentRoundsRoutes = require('./routes/tournamentRounds.routes');
+const roundRoutes = require('./routes/round.routes');
 
-  return (
-    <div className="min-h-screen flex">
-      {showSidebar && <Sidebar />}
-      <div className="flex-1">
-        <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/" element={<RequireAuth><Dashboard /></RequireAuth>} />
-          <Route path="/moderation" element={<RequireAuth><Moderation /></RequireAuth>} />
-          <Route path="/resources" element={<RequireAuth><ResourceManager /></RequireAuth>} />
-        </Routes>
-      </div>
-    </div>
-  );
-}
+const app = express();
 
-function Sidebar() {
-  const location = useLocation();
-  const linkClass = (path) =>
-    `block px-4 py-2.5 rounded-lg text-sm font-medium ${
-      location.pathname === path ? "bg-ink text-sand" : "text-ink/70 hover:bg-clay/50"
-    }`;
+// Helmet's default Content-Security-Policy blocks Swagger UI
+app.use((req, res, next) => {
+  if (req.path.startsWith('/docs')) {
+    return helmet({
+      contentSecurityPolicy: {
+        directives: {
+          ...helmet.contentSecurityPolicy.getDefaultDirectives(),
+          'script-src': ["'self'", "'unsafe-inline'", "'unsafe-eval'"],
+          'style-src': ["'self'", "'unsafe-inline'", 'https:'],
+        },
+      },
+    })(req, res, next);
+  }
+  return helmet()(req, res, next);
+});
+app.use(cors());
+app.use(express.json());
+app.use(morgan(process.env.NODE_ENV === 'test' ? 'silent' : 'dev'));
 
-  return (
-    <aside className="w-56 border-r border-clay bg-white p-4 hidden sm:block">
-      <p className="font-semibold text-ink mb-1">DrugPhobia AI</p>
-      <p className="text-[11px] text-ink/40 mb-6">Admin</p>
-      <nav className="space-y-1">
-        <Link to="/" className={linkClass("/")}>Dashboard</Link>
-        <Link to="/moderation" className={linkClass("/moderation")}>Moderation</Link>
-        <Link to="/resources" className={linkClass("/resources")}>Resource Manager</Link>
-      </nav>
-    </aside>
-  );
-}
+// Basic rate limiting to blunt brute-force/abuse on a public API.
+app.use(
+  rateLimit({
+    windowMs: 15 * 60 * 1000,
+    limit: 300,
+    standardHeaders: true,
+    legacyHeaders: false,
+  })
+);
+
+app.get('/health', (req, res) => res.json({ status: 'ok', uptime: process.uptime() }));
+
+// A small landing page at the root, mainly so a bare visit to the deployed
+
+app.get('/', (req, res) => {
+  res.type('html').send(`<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Debate Tournament Management API</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 640px; margin: 4rem auto; padding: 0 1.5rem; color: #1a1a1a; line-height: 1.6; }
+    h1 { font-size: 1.5rem; }
+    a { color: #2563eb; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    code { background: #f4f4f5; padding: 0.15em 0.4em; border-radius: 4px; font-size: 0.9em; }
+    ul { padding-left: 1.2rem; }
+  </style>
+</head>
+<body>
+  <h1>Debate Tournament Management API</h1>
+  <p>REST API for managing British Parliamentary debate tournaments — teams, rounds, ballots, computed standings, Swiss-style pairing, and CSV/PDF export.</p>
+  <ul>
+    <li><a href="/docs">Interactive API docs (Swagger)</a></li>
+    <li><a href="/health">Health check</a></li>
+    <li><a href="/api/tournaments">GET /api/tournaments</a> — list tournaments</li>
+  </ul>
+  <p>Source on <a href="https://github.com/WRLD-BTN/debate-tournament-api">GitHub</a>.</p>
+</body>
+</html>`);
+});
+
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
+app.use('/api/auth', authRoutes);
+app.use('/api/tournaments', tournamentRoutes);
+app.use('/api/tournaments/:tournamentId/teams', teamRoutes);
+app.use('/api/tournaments/:tournamentId/rounds', tournamentRoundsRoutes);
+app.use('/api/rounds', roundRoutes);
+
+app.use((req, res) => res.status(404).json({ error: 'Route not found.' }));
+app.use(errorHandler);
+
+module.exports = app;
